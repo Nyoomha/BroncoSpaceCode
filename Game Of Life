@@ -1,0 +1,134 @@
+// C++
+// Neha Khan
+
+#include <iostream>
+#include <vector>
+#include<time.h>
+using namespace std;
+
+const int row = 8;
+const int col = 8;
+
+//Counts to see how many cells are alive with every loop once matrix is generated
+int cells_alive (int a[8][8], int w, int z)
+{
+  int i, j, count = 0;
+
+  for (i = w - 1; i <= w + 1; i++)
+    {
+      for (j = z - 1; j <= z + 1; j++)
+	{
+	  if ((i == w && j == z) || (i < 0 || j < 0)
+	      || (i >= row || j >= col))
+	    {
+	      continue;
+	    }
+    //if alive will add to count
+	  if (a[i][j] == 1)
+	    {
+	      count++;
+	    }
+	}
+
+      return count;
+    }
+
+  return 1;
+}
+
+void next_gen ()
+{
+    //generates new random number each time
+  srand (time (0));
+
+  //initializing the 8x8 matrix
+  int a[row][col], b[row][col], x, y, i, j;
+  int neighb;
+  int count = 1;
+
+//creates starting matrix of cells in a 8x8
+
+  for (x = 0; x < row; x++)
+    {
+      for (y = 0; y < col; y++)
+	{
+	  a[x][y] = rand () % 2;
+	}
+    }
+
+//Prints initial 8x8 matrix with random 0s and 1s
+  cout << "Game begin:";
+  for (x = 0; x < row; x++)
+    {
+      cout << " \n ";
+
+      for (y = 0; y < col; y++)
+	{
+	  cout << "  " << a[x][y];
+	}
+
+    }
+
+//goes through array to check cells
+  //do
+    //{
+      for (i = 0; i < row; i++)
+	{
+	  for (j = 0; j < col; j++)
+	    {
+	      neighb = cells_alive (a, i, j);
+	      //if a 1 is next two 2 or 3 alive neighbors it lives
+	      if (a[i][j] == 1 && (neighb == 2 || neighb == 3))
+		{
+		  // alive     
+		  b[i][j] = 1;
+		}
+	      // if a 0 is next to 3 alive cells it lives
+	      else if (a[i][j] == 0 && neighb == 3)
+		{
+		  // alive
+		  b[i][j] = 1;
+		}
+
+	      // all other cases death    
+	      else
+		{
+		  //dead
+		  b[i][j] = 0;
+		}
+
+	    }
+	}
+
+      cout << "\nNext Generation:";
+
+      for (i = 0; i < row; i++)
+	{
+	  cout << " \n ";
+
+	  for (j = 0; j < col; j++)
+	    {
+	      cout << "  " << b[i][j];
+	      count++;
+	    }
+	  
+	}
+	if (count == 5)
+	    {
+	     exit(0);
+
+	    }
+    //}
+     // while (count > 1 || count == 5); (tried to make code run until all numbers in array were 0 but could not)
+      
+    }
+
+  int main ()
+  {
+
+    next_gen ();
+
+    return 0;
+  }
+
+
