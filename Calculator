@@ -1,0 +1,42 @@
+// Calculator_.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// Neha Khan
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	double num1, num2;
+	char expression;
+
+	// User input of the operands
+	cout << "Please enter your two numbers:" << endl;
+	cin >> num1 >> num2;
+
+	// Checking if inputs were a string or not. If not a string program will continue
+	if (!isnan(num1) && !isnan(num2))
+	{
+		//If num1 and num2 are both entered correctly the program continues
+		cout << "Please enter a '+' if you would like to add the numbers or a '*' if you would like to multiply:\n";
+		cin >> expression;
+
+		//checking what operation
+		switch (expression)
+		{
+		//checking if user wants addition
+		case '+':
+			cout << num1 << "+" << num2 << "=" << num1 + num2 << endl;;
+			break;
+		//checking if user want multiplication
+		case '*':
+			cout << num1 << "*" << num2 << "=" << num1 * num2 << endl;;
+			break;
+		//if something else is entered, program will end
+		default:
+			cout << "Invalid input" << endl;
+		}
+		
+	}
+	
+}
