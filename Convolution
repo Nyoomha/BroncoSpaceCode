@@ -1,0 +1,64 @@
+#in python
+#Neha Khan
+
+import numpy as np 
+
+class MatrixOps:
+    def __init__ (self, seed = None):
+#We use a predetermined seed to evaluate correct implementation
+        if seed:
+            np.random.seed(seed)
+        self._matrix = np.random.randint(0,10, size=(10,10))
+        self._kernel = np.random.randint(-2,2, size=(3,3))
+
+    def largest_index(self, matrix):
+ 
+ #using numpy to find the max in the matrix and created their tuple
+        result = np.where(self._matrix == np.amax(self._matrix))
+        print('Tuple of arrays returned : ', result)
+        
+    
+        listOfCordinates = list(zip(result[0], result[1]))
+    #lists the coordinates by going through each 
+        
+        return (listOfCordinates)
+
+    def convolve(self, kernel, matrix):
+        ''' Make this function return the result of a 2D convolution '''
+        
+        for row_i in range(0, output_height, stride):
+        row_result = []
+        submatrix_row = slice(row_i, row_i + kernel_height)
+
+        for column_i in range(0, output_width, stride):
+            submatrix_column = slice(column_i, column_i + kernel_width)
+            submatrix_indexes = submatrix_row, submatrix_column
+
+            z = np.sum(input_[submatrix_indexes] * kernel)
+            row_result.append(z)
+
+        result.append(row_result)
+
+    return np.array(result)
+
+        return matrix
+
+    def run(self):
+        print("Largest index is at ", self.largest_index(self._matrix))
+
+        print("Result of convolution:")
+        print(self.convolve(self._kernel, self._matrix))
+
+
+if __name__ == "__main__":
+    
+    # If this file is run directly from the command line, run a test of the program
+    m = MatrixOps()
+
+    
+    print("Running with matrix ")
+    print(m._matrix)
+    print("and kernel ")
+    print(m._kernel)
+
+    m.run()
